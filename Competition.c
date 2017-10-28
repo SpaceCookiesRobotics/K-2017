@@ -2,7 +2,7 @@
 #pragma config(Motor,  port2,           twoleft,       tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           tworight,      tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port4,           claw,          tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port5,           lift,          tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port5,           lift,          tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port6,           dr4b1,         tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port7,           dr4b2,         tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port8,           dr4b3,         tmotorVex393_MC29, openLoop, reversed)
@@ -27,50 +27,42 @@ void vertical (int speed) {
 	setright (speed);
 }
 
-void turn (int speed, int turnvar) {
+void turn (int speed, int turnvar) { //-1 is left, 1 is right
 	setleft (turnvar*speed);
 	setright (-1*turnvar*speed);
 }
 
-void autonomous () {
-	turn (100, -1);
-	wait1Msec (500);
-	vertical (127);
-	wait1Msec (1500);
-	motor[lift]=120;
-	wait1Msec (100);
-	vertical (-127);
-	wait1Msec (800);
-	turn (100, 1);
-	wait1Msec (500);
-	vertical (127);
-	wait1Msec (100);
-	motor[lift]=120;
-	wait1Msec (100);
+void dr4blift (int speed, int direct) { //1 is up, -1 is down
+	motor[dr4b1]=speed*direct;
+	motor[dr4b2]=speed*direct;
+	motor[dr4b3]=speed*direct;
+	motor[dr4b4]=speed*direct;
 }
 
-/*	turn (1);
-wait1Msec (2000);
-vertical (100);
-wait1Msec (400);
-turn (1);
-wait1Msec (2000);
-turn (-1);
-wait1Msec (2000);
-vertical (100);
-wait1Msec (1000);
-motor [lift] = -100;
-wait1Msec (500);
-motor [lift] = 100;
-wait1Msec (1000);
-vertical (50);
-wait1Msec (500);
-vertical (-100);
-wait1Msec (1100);
-turn (-1);
-wait1Msec (1300);
-vertical (127);
-wait1Msec (3200); */
+void autonomous () {
+	turn (127, -1);
+	wait1Msec (450);
+	vertical (90);
+	wait1Msec (2500);
+	dr4blift (80, 1);
+	wait1Msec (10);
+	vertical (127);
+	wait1Msec (500);
+
+	motor[lift]=70;
+	wait1Msec (2);
+	vertical (-127);
+	wait1Msec (1000);
+	turn (127, 1);
+	wait1Msec (1900);
+	vertical (127);
+	wait1Msec (3000);
+	motor[lift]=70;
+	wait1Msec (2);
+
+	vertical (127);
+	wait1Msec (2000);
+	}
 
 void joystick () {
 int joy_x;            // will hold the X value of the analog stick (choices below)
@@ -93,7 +85,7 @@ while(1 == 1) {
 	// Mobile Goal Lift motor
 	motor[lift] = vexRT[Ch2]/slowdown;
 	// DR4B Claw
-	motor[claw] = vexRT[Ch3Xmtr2]/slowdown;
+	motor[claw] = vexRT[Ch3Xmtr2]/2;
 	// DR4B motors
 	motor[dr4b1] = vexRT[Ch2Xmtr2]/slowdown;
 	motor[dr4b2] = vexRT[Ch2Xmtr2]/slowdown;
