@@ -21,9 +21,9 @@ void setright (int speed) {
 	motor[tworight]=speed;
 	}
 
-void vertical (int speed, int turnvar) {
-	setleft (speed*turnvar);
-	setright (speed*turnvar);
+void vertical (int speed) {
+	setleft (speed);
+	setright (speed);
 }
 
 void turn (int speed, int turnvar) { //-1 is left, 1 is right
@@ -31,29 +31,30 @@ void turn (int speed, int turnvar) { //-1 is left, 1 is right
 	setright (-1*turnvar*speed);
 }
 
-void dr4blift (int speed, int direct) { //1 is up, -1 is down
-	motor[dr4b1]=speed*direct;
-	motor[dr4b2]=speed*direct;
-	motor[dr4b3]=speed*direct;
-	motor[dr4b4]=speed*direct;
+void dr4blift (int speed) { //1 is up, -1 is down
+	motor[dr4b1]=speed;
+	motor[dr4b2]=speed;
+	motor[dr4b3]=speed;
+	motor[dr4b4]=speed;
 }
 
 void autonomous () { //goes to left of field, picks up mobile goal, and deposits in 10 pt zone
-	dr4blift (60, 1);  //dr4b up
-	wait1Msec (60);
-	dr4blift (0, 1);
-
-	vertical (127, 1); //forward till mobile goal lift
-	wait1Msec (3200);
-	vertical (0, 1);
-
-	dr4Blift (60, -1); //dr4b down
-
-	motor[claw]=100;  //open claw, release cone
-	wait1Msec (5);
-	motor[claw]0;
-
-	vertical (127, -1);
+	motor[claw]=-127;  //close claw, grab cone
+	wait1Msec (1100);
+	dr4blift (127);  //dr4b up
+	wait1Msec (900);
+	dr4blift (0);
+	vertical (127); //forward until mobile goal lift
+	wait1Msec (2800);
+	motor[claw]= 0;
+	vertical (0);
+	dr4blift (-60); //dr4b down
+	wait1Msec (500);
+	dr4blift (0);
+	motor[claw]=127;  //open claw, release cone
+	wait1Msec (700);
+	motor[claw]= 0;
+	vertical (-127);
 	wait1Msec (200);
 	}
 
