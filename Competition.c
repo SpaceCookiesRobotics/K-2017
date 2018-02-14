@@ -26,10 +26,13 @@ void vertical (int speed) {
 	setright (speed);
 }
 
-void turn (int speed, int turnvar) { //-1 is left, 1 is right
-	setleft (turnvar*speed);
-	setright (-1*turnvar*speed);
-}
+void turnleft (int speed) {
+	setleft (-1*speed);
+	setright (speed); }
+
+void turnright (int speed) {
+	setleft (speed);
+	setright (-1*speed); }
 
 void dr4blift (int speed) { //1 is up, -1 is down
 	motor[dr4b1]=speed;
@@ -38,24 +41,55 @@ void dr4blift (int speed) { //1 is up, -1 is down
 	motor[dr4b4]=speed;
 }
 
-void autonomous () { //goes to left of field, picks up mobile goal, and deposits in 10 pt zone
+void autonomous () {
+	/*
 	motor[claw]=-127;  //close claw, grab cone
 	wait1Msec (1100);
 	dr4blift (127);  //dr4b up
+	vertical (127); //forward until mobile goal lift
 	wait1Msec (900);
 	dr4blift (0);
-	vertical (127); //forward until mobile goal lift
-	wait1Msec (2800);
+	wait1Msec (1900);
 	motor[claw]= 0;
 	vertical (0);
 	dr4blift (-60); //dr4b down
-	wait1Msec (500);
+	wait1Msec (1000);
 	dr4blift (0);
 	motor[claw]=127;  //open claw, release cone
 	wait1Msec (700);
 	motor[claw]= 0;
 	vertical (-127);
+	wait1Msec (100);
+	vertical (0);	*/
+
+	vertical (120);
+	wait1Msec (1600);
+	vertical (30);
+	wait1Msec (100);
+	motor[lift]=50;
+	wait1Msec (350);
+	vertical (20);
+	wait1Msec (100);
+	turnleft (100);
+	wait1Msec (1050);
+	vertical (120);
+	wait1Msec (1700);
+	vertical (-120);
+	wait1Msec (1300);
+	turnleft (120);
+	wait1Msec (400);
+	vertical (127);
+	wait1Msec (2000);
+	motor[lift]=70;
+	wait1Msec (50);
+	turnleft (50);
 	wait1Msec (200);
+	vertical (120);
+	wait1Msec (1400);
+	motor[lift]=-60;
+	wait1Msec (300);
+//	turnright (120);
+//	wait1Msec (200);
 	}
 
 void joystick () {
@@ -78,12 +112,15 @@ while(1 == 1) {
 
 	// Mobile Goal Lift motor
 	motor[lift] = vexRT[Ch2]/slowdown;
-	// DR4B Claw
+	// DR4B Claw[
 	motor[claw] = vexRT[Ch3Xmtr2]/2;
 	// DR4B motors
 	motor[dr4b1] = vexRT[Ch2Xmtr2]/slowdown;
 	motor[dr4b2] = vexRT[Ch2Xmtr2]/slowdown;
 	motor[dr4b3] = vexRT[Ch2Xmtr2]/slowdown;
 	motor[dr4b4] = vexRT[Ch2Xmtr2]/slowdown;
+	if (vexRT[Btn5UXmtr2] == 1) { //button to raise dr4b to height of preload
+		dr4blift (100);
+		wait1Msec (220); }
 }
 }
