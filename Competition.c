@@ -42,32 +42,49 @@ void dr4blift (int speed) { //1 is up, -1 is down
 }
 
 void autonomous () {
-	/*
+	dr4blift (-127);
+	wait1Msec (300);
 	motor[claw]=-127;  //close claw, grab cone
-	wait1Msec (1100);
 	dr4blift (127);  //dr4b up
+	vertical (127);
+	wait1Msec (600);
+	motor[claw]=0;
+	turnleft (127);
+	wait1Msec (600);
+	vertical (127);  //go forward quickly
+	wait1Msec (390);
+	vertical (-127); //backward quickly
+	wait1Msec (500);
+	turnright (127);
+	wait1Msec (730);
 	vertical (127); //forward until mobile goal lift
-	wait1Msec (900);
+	wait1Msec (500);
 	dr4blift (0);
-	wait1Msec (1900);
+	wait1Msec (1800);
 	motor[claw]= 0;
 	vertical (0);
 	dr4blift (-60); //dr4b down
-	wait1Msec (1000);
+	wait1Msec (1250);
 	dr4blift (0);
 	motor[claw]=127;  //open claw, release cone
 	wait1Msec (700);
 	motor[claw]= 0;
-	vertical (-127);
+	dr4blift (127); //move dr4b up slightly
+	wait1Msec (500);
+	vertical (40);
+	wait1Msec (200);
+	motor[lift]=60;
 	wait1Msec (100);
-	vertical (0);	*/
-
-	vertical (120);
+	turnright (100);
+	wait1Msec (1700);
+	vertical (127);
+	wait1Msec (2000);
+	/*vertical (120);
 	wait1Msec (1600);
 	vertical (30);
-	wait1Msec (100);
+	wait1Msec (650);
 	motor[lift]=50;
-	wait1Msec (350);
+	wait1Msec (100);
 	vertical (20);
 	wait1Msec (100);
 	turnleft (100);
@@ -75,21 +92,25 @@ void autonomous () {
 	vertical (120);
 	wait1Msec (1700);
 	vertical (-120);
-	wait1Msec (1300);
+	wait1Msec (1400);
 	turnleft (120);
-	wait1Msec (400);
+	wait1Msec (300);
 	vertical (127);
 	wait1Msec (2000);
-	motor[lift]=70;
-	wait1Msec (50);
+	motor[lift]=30;
+	wait1Msec (20);
 	turnleft (50);
 	wait1Msec (200);
 	vertical (120);
 	wait1Msec (1400);
-	motor[lift]=-60;
-	wait1Msec (300);
+	motor[lift]=-50;
+	wait1Msec (100);
+	vertical (-127);
+	wait1Msec (2200);
+//	motor[lift]=-60;
+//	wait1Msec (300);
 //	turnright (120);
-//	wait1Msec (200);
+//	wait1Msec (200); */
 	}
 
 void joystick () {
