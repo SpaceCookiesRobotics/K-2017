@@ -43,43 +43,61 @@ void dr4blift (int speed) { //1 is up, -1 is down
 
 void autonomous () {
 	dr4blift (-127);
-	wait1Msec (300);
+	wait1Msec (400);
 	motor[claw]=-127;  //close claw, grab cone
+	wait1Msec (600);
 	dr4blift (127);  //dr4b up
-	vertical (127);
-	wait1Msec (600);
-	motor[claw]=0;
-	turnleft (127);
-	wait1Msec (600);
-	vertical (127);  //go forward quickly
-	wait1Msec (390);
-	vertical (-127); //backward quickly
-	wait1Msec (500);
-	turnright (127);
-	wait1Msec (730);
+	wait1Msec (750);
 	vertical (127); //forward until mobile goal lift
-	wait1Msec (500);
+	wait1Msec (2700);
 	dr4blift (0);
-	wait1Msec (1800);
-	motor[claw]= 0;
+	motor[claw]=-127;
+	wait1Msec (700);
+	vertical (50);
+	wait1Msec (200);
 	vertical (0);
-	dr4blift (-60); //dr4b down
-	wait1Msec (1250);
+	dr4blift (-50); //dr4b down
+	wait1Msec (700);
 	dr4blift (0);
 	motor[claw]=127;  //open claw, release cone
-	wait1Msec (700);
+	wait1Msec (2200);
 	motor[claw]= 0;
 	dr4blift (127); //move dr4b up slightly
-	wait1Msec (500);
-	vertical (40);
+	wait1Msec (800);
+	vertical (120);
+	wait1Msec (600);
+	motor[lift]=127;
+	wait1Msec (600);
+	motor[lift]=0;
+	vertical (-70);
+	wait1Msec (3800);
+	turnright (127);
+	wait1Msec (1195);
+	motor[lift]=100;
+	wait1Msec (50);
+	vertical (100);
+	wait1Msec (1600);
+	motor[lift]=-50;
 	wait1Msec (200);
-	motor[lift]=60;
-	wait1Msec (100);
-	turnright (100);
+	vertical (-100);
+	wait1Msec (500);
+/*	turnright (80);
+	wait1Msec (1100);
+	vertical (90);
 	wait1Msec (1700);
+	turnright (100);
+	wait1Msec (1100);
 	vertical (127);
 	wait1Msec (2000);
-	/*vertical (120);
+	turnright (100);
+	wait1Msec (700);
+	vertical (100);
+	wait1Msec (1000);
+	turnleft (100);
+	wait1Msec (600);
+	vertical (100);
+	wait1Msec (1000);
+	vertical (120);
 	wait1Msec (1600);
 	vertical (30);
 	wait1Msec (650);
@@ -142,6 +160,7 @@ while(1 == 1) {
 	motor[dr4b4] = vexRT[Ch2Xmtr2]/slowdown;
 	if (vexRT[Btn5UXmtr2] == 1) { //button to raise dr4b to height of preload
 		dr4blift (100);
-		wait1Msec (220); }
+		wait1Msec (220);
+		dr4blift (0);}
 }
 }
