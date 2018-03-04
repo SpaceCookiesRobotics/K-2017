@@ -42,45 +42,63 @@ void dr4blift (int speed) { //1 is up, -1 is down
 }
 
 void autonomous () {
-	dr4blift (-127);
+/*	dr4blift (-127);
 	wait1Msec (400);
 	motor[claw]=-127;  //close claw, grab cone
 	wait1Msec (600);
 	dr4blift (127);  //dr4b up
 	wait1Msec (750);
-	vertical (127); //forward until mobile goal lift
+	vertical (127); //forward until mobile goal
 	wait1Msec (2700);
 	dr4blift (0);
 	motor[claw]=-127;
 	wait1Msec (700);
 	vertical (50);
-	wait1Msec (200);
+	wait1Msec (150);
 	vertical (0);
 	dr4blift (-50); //dr4b down
 	wait1Msec (700);
 	dr4blift (0);
 	motor[claw]=127;  //open claw, release cone
-	wait1Msec (2200);
+	wait1Msec (700);
 	motor[claw]= 0;
 	dr4blift (127); //move dr4b up slightly
-	wait1Msec (800);
+	wait1Msec (700);
 	vertical (120);
 	wait1Msec (600);
-	motor[lift]=127;
+	motor[lift]=60;
 	wait1Msec (600);
 	motor[lift]=0;
 	vertical (-70);
 	wait1Msec (3800);
 	turnright (127);
-	wait1Msec (1195);
+	wait1Msec (1395);
 	motor[lift]=100;
 	wait1Msec (50);
 	vertical (100);
-	wait1Msec (1600);
-	motor[lift]=-50;
-	wait1Msec (200);
-	vertical (-100);
+	wait1Msec (2750);
+	motor[lift]=-60;
+	wait1Msec (600);
+	vertical (-127);
+	wait1Msec (900); */
+	motor[claw]=-127;  //close claw, grab cone
+	wait1Msec (1100);
+	dr4blift (127);  //dr4b up
+	wait1Msec (900);
+	dr4blift (0);
+	vertical (127); //forward until mobile goal lift
+	wait1Msec (2800);
+	motor[claw]= 0;
+	vertical (0);
+	dr4blift (-60); //dr4b down
 	wait1Msec (500);
+	dr4blift (0);
+	motor[claw]=127;  //open claw, release cone
+	wait1Msec (700);
+	motor[claw]= 0;
+	vertical (-127);
+	wait1Msec (200);
+
 /*	turnright (80);
 	wait1Msec (1100);
 	vertical (90);
