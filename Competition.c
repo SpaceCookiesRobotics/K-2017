@@ -4,7 +4,7 @@
 #pragma config(Motor,  port1,           middleleft,    tmotorVex393_HBridge, openLoop, reversed)
 #pragma config(Motor,  port2,           twoleft,       tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           tworight,      tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port4,           claw,          tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port4,           claw,          tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port5,           lift,          tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port6,           dr4b1,         tmotorVex393_MC29, openLoop, encoderPort, I2C_1)
 #pragma config(Motor,  port7,           dr4b2,         tmotorVex393_MC29, openLoop, reversed)
@@ -52,7 +52,7 @@ void autonomous () {
 	dr4blift (-127);
 	wait1Msec (400);
 	motor[claw]=-127;  //close claw, grab cone
-	wait1Msec (600);
+	wait1Msec (3000);
 
 
 	dr4blift (127);   //dr4b up
@@ -75,7 +75,7 @@ void autonomous () {
 	turnright(-127);//added line
 	while (SensorValue[Gyro] < 1800) {}
   vertical (127);//cf -70
-	wait1Msec (3000);
+	wait1Msec (3200);
 
 	// Drop the mobile goal and go back to leave it
 	// in the 5pts zone.
@@ -86,7 +86,7 @@ void autonomous () {
 	motor[lift] =0;
 	motor[claw] = 0;
 	vertical (-127);
-  wait1Msec(2000);
+  wait1Msec(1000);
 }
 
 void joystick () {
