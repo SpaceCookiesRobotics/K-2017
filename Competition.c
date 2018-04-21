@@ -52,19 +52,17 @@ void autonomous () {
 	dr4blift (-127);
 	wait1Msec (400);
 	motor[claw]=-127;  //close claw, grab cone
-	wait1Msec (3000);
-
+	wait1Msec (1000);
 
 	dr4blift (127);   //dr4b up
-	wait1Msec (250);
-
 	vertical (127);   //forward until mobile goal
-	wait1Msec (500);
+	wait1Msec (4500);
+	vertical (0);
 	dr4blift (0);
-	wait1Msec (2600);
+	wait1Msec (200);
 	vertical (0);
 
-	//cone is held on to of mobile goal
+	//cone is put onto mobile goal
 	dr4blift (-127); //dr4b down
 	wait1Msec (300);
 	dr4blift (0);
@@ -73,11 +71,11 @@ void autonomous () {
 	motor[lift] =0;
    //robot turns around and goes back
 	turnright(-127);//added line
-	while (SensorValue[Gyro] < 1800) {}
+	wait1Msec (1300);
   vertical (127);//cf -70
-	wait1Msec (3200);
+	wait1Msec (3300);
 
-	// Drop the mobile goal and go back to leave it
+	// Drop the mobile goal and go back
 	// in the 5pts zone.
 	motor[lift] =-127;
 	motor[claw]= +127;
